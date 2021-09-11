@@ -92,20 +92,20 @@ secGrowth22 = msscm *x['cm',2022] + mssic *x['ic',2022] + mssms *x['ms',2022] + 
 
 m.addConstr(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') + msppn *x.sum('pn','*')
 + mspwb *x.sum('wb','*') + mspb *x.sum('b','*') + mspa *x.sum('a','*') + mspot *x.sum('ot','*') + mspah *x.sum('ah','*')
-+ mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') >= 0.1)
++ mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') -0.03 >= 0.1)
 
 m.addConstr(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') + msppn *x.sum('pn','*')
 + mspwb *x.sum('wb','*') + mspb *x.sum('b','*') + mspa *x.sum('a','*') + mspot *x.sum('ot','*') + mspah *x.sum('ah','*')
-+ mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') <= 0.16)
++ mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') -0.03 <= 0.16)
 
 ##Secondary market share grows in 2023-2031(6%-9%):
 m.addConstr(msscm *x.sum('cm','*') + mssic *x.sum('ic','*') + mssms *x.sum('ms','*') + msspn *x.sum('pn','*')
 + msswb *x.sum('wb','*') + mssb *x.sum('b','*') + mssa *x.sum('a','*') + mssot *x.sum('ot','*') + mssah *x.sum('ah','*')
-+ mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*')  >= 0.06)
++ mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*')  -0.02 >= 0.06)
 
 m.addConstr(msscm *x.sum('cm','*') + mssic *x.sum('ic','*') + mssms *x.sum('ms','*') + msspn *x.sum('pn','*')
 + msswb *x.sum('wb','*') + mssb *x.sum('b','*') + mssa *x.sum('a','*') + mssot *x.sum('ot','*') + mssah *x.sum('ah','*')
-+ mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*')  <= 0.09)
++ mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*')  -0.02 <= 0.09)
 
 # # ##Regional market share:
 # total_market_share = mstcm *x.sum('cm','*') + mstic *x.sum('ic','*') + mstms *x.sum('ms','*') + mstpn *x.sum('pn','*')
