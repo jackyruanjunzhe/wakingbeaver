@@ -138,8 +138,8 @@ m.addConstr(mstah *sumX['ah'] + mstd *sumX['d'] + mstp *sumX['p'] >= total_marke
 m.addConstr(mstah *sumX['ah'] + mstd *sumX['d'] + mstp *sumX['p'] <= total_market_share * 0.22)
 #
 ##West
-# m.addConstr(mstls *sumX['ls'] + mstss *sumX['ss'] + mstps *sumX['ps'] >= total_market_share * 0.135)
-m.addConstr(mstls *sumX['ls'] + mstss *sumX['ss'] + mstps *sumX['ps'] <= total_market_share * 0.165)
+m.addConstr(mstls *sumX['ls'] + mstss *sumX['ss'] + mstps *sumX['ps'] >= total_market_share * 0.135)
+# m.addConstr(mstls *sumX['ls'] + mstss *sumX['ss'] + mstps *sumX['ps'] <= total_market_share * 0.165)
 
 ##General Constraints
 m.addConstrs(x.sum('*',i) == 1 for i in range (2022,2024))
