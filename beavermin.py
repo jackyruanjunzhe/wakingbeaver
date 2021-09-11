@@ -102,20 +102,20 @@ secGrowth22 = msscm *x['cm',2022] + mssic *x['ic',2022] + mssms *x['ms',2022] + 
 
 m.addConstr(mspcm *sumX['cm'] + mspic *sumX['ic'] + mspms *sumX['ms'] + msppn *sumX['pn']
 + mspwb *sumX['wb'] + mspb *sumX['b'] + mspa *sumX['a'] + mspot *sumX['ot'] + mspah *sumX['ah']
-+ mspd *sumX['d'] + mspp *sumX['p'] + mspls *sumX['ls'] + mspss *sumX['ss'] + mspps *sumX['ps'] - priGrowth22 >= 0.1)
++ mspd *sumX['d'] + mspp *sumX['p'] + mspls *sumX['ls'] + mspss *sumX['ss'] + mspps *sumX['ps']  >= 0.1)
 
 m.addConstr(mspcm *sumX['cm'] + mspic *sumX['ic'] + mspms *sumX['ms'] + msppn *sumX['pn']
 + mspwb *sumX['wb'] + mspb *sumX['b'] + mspa *sumX['a'] + mspot *sumX['ot'] + mspah *sumX['ah']
-+ mspd *sumX['d'] + mspp *sumX['p'] + mspls *sumX['ls'] + mspss *sumX['ss'] + mspps *sumX['ps'] - priGrowth22 <= 0.16)
++ mspd *sumX['d'] + mspp *sumX['p'] + mspls *sumX['ls'] + mspss *sumX['ss'] + mspps *sumX['ps'] <= 0.16)
 
 ##Secondary market share grows in 2023-2031(6%-9%):
 m.addConstr(msscm *sumX['cm'] + mssic *sumX['ic'] + mssms *sumX['ms'] + msspn *sumX['pn']
 + msswb *sumX['wb'] + mssb *sumX['b'] + mssa *sumX['a'] + mssot *sumX['ot'] + mssah *sumX['ah']
-+ mssd *sumX['d'] + mssp *sumX['p'] + mssls *sumX['ls'] + mssss *sumX['ss'] + mssps *sumX['ps'] - secGrowth22 >= 0.06)
++ mssd *sumX['d'] + mssp *sumX['p'] + mssls *sumX['ls'] + mssss *sumX['ss'] + mssps *sumX['ps']  >= 0.06)
 
 m.addConstr(msscm *sumX['cm'] + mssic *sumX['ic'] + mssms *sumX['ms'] + msspn *sumX['pn']
 + msswb *sumX['wb'] + mssb *sumX['b'] + mssa *sumX['a'] + mssot *sumX['ot'] + mssah *sumX['ah']
-+ mssd *sumX['d'] + mssp *sumX['p'] + mssls *sumX['ls'] + mssss *sumX['ss'] + mssps *sumX['ps'] - secGrowth22 <= 0.09)
++ mssd *sumX['d'] + mssp *sumX['p'] + mssls *sumX['ls'] + mssss *sumX['ss'] + mssps *sumX['ps']  <= 0.09)
 
 # ##Regional market share:
 # total_market_share = mstcm *sumX['cm'] + mstic *sumX['ic'] + mstms *sumX['ms'] + mstpn *sumX['pn']
