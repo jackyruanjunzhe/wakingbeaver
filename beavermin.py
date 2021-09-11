@@ -68,10 +68,14 @@ mssss = 0.015
 mssps = 0.005
 
 
+
+sum_city_allyear = 0
+for j in range (0,14):
+    sum_city_allyear = sum_city_allyear + sumX[citylist[j]]
+
+
 ##Objective Value setting
-m.setObjective(mstcm *sumX['cm'] + mstic *sumX['ic'] + mstms *sumX['ms'] + mstpn *sumX['pn']
-+ mstwb *sumX['wb'] + mstb *sumX['b'] + msta *sumX['a'] + mstot *sumX['ot'] + mstah *sumX['ah']
-+ mstd *sumX['d'] + mstp *sumX['p'] + mstls *sumX['ls'] + mstss *sumX['ss'] + mstps *sumX['ps'] , sense = GRB.MAXIMIZE)
+m.setObjective(sum_city_allyear , sense = GRB.MINIMIZE)
 
 ##Constraints
 ##Primary market share grows in 2022(3%)
