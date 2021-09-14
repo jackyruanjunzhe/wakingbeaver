@@ -2,13 +2,13 @@ from gurobipy import *
 
 m = Model('wakingbeaver')
 ##set X vairables to be binary
-x = m.addVars(['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','ps'],
-[2022,2023,2024,2025,2026,2027,2028,2029,2030,2031], vtype=GRB.BINARY)
+citylist = ['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','ps']
+lmarketlist = ['cm', 'pn','wb','a','ls']
+yearlist = [2022,2023,2024,2025,2026,2027,2028,2029,2030,2031]
 
 ## Calculate the sumX of each city in all year
 ## Set a dictionary to store value of each city's sumX in all year into different SumX
-citylist = ['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','ps']
-yearlist = [2022,2023,2024,2025,2026,2027,2028,2029,2030,2031]
+x = m.addVars(citylist,yearlist, vtype=GRB.BINARY)
 sumX = {}
 for j in range (0,14):
     sumX[citylist[j]] = 0
@@ -152,6 +152,7 @@ m.addConstrs(x.sum('*',i) <= 2 for i in range (2024,2032))
 m.addConstrs(x[citylist[i],2022]+ x[citylist[i],2023] + x[citylist[i],2024] + x[citylist[i],2025]
 + x[citylist[i],2026] + x[citylist[i],2027] + x[citylist[i],2028] + x[citylist[i],2029] + x[citylist[i],2030]
 + x[citylist[i],2031] <= 1 for i in range(0,14))
+m.addConstrs(x.sum(lmarketlist,i) <= 1 for i in yearlist)
 
 
 m.optimize()
