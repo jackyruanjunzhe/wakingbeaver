@@ -2,11 +2,15 @@ from gurobipy import *
 
 m = Model('wakingbeaver')
 ##set X vairables to be binary
+x = m.addVars(['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','ps'],
+[2022,2023,2024,2025,2026,2027,2028,2029,2030,2031], vtype=GRB.BINARY)
+
+## Calculate the sumX of each city in all year
+## Set a dictionary to store value of each city's sumX in all year into different SumX
 citylist = ['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','ps']
-lmarketlist = ['cm', 'pn','wb','a','ls']
 yearlist = [2022,2023,2024,2025,2026,2027,2028,2029,2030,2031]
 
-x = m.addVars(citylist,yearlist,vtype=GRB.BINARY)
+
 
 ##set the coefficient (the total market share of each city) as variables for future changes
 ##mst represent market share in total
@@ -59,9 +63,9 @@ mssps = 0.005
 
 
 ##Objective Value setting
-m.setObjective(mstcm *x.sum('cm','*') + mstic *x.sum('ic','*') + mstms *x.sum('ms','*') + mstpn *x.sum('pn','*')
-+ mstwb *x.sum('wb','*') + mstb *x.sum('b','*') + msta *x.sum('a','*') + mstot *x.sum('ot','*') + mstah *x.sum('ah','*')
-+ mstd *x.sum('d','*') + mstp *x.sum('p','*') + mstls *x.sum('ls','*') + mstss *x.sum('ss','*') + mstps *x.sum('ps','*') , sense = GRB.MAXIMIZE)
+m.setObjective(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') + msppn *x.sum('pn','*')
++ mspwb *x.sum('wb','*') + mspb *x.sum('b','*') + mspa *x.sum('a','*') + mspot *x.sum('ot','*') + mspah *x.sum('ah','*')
++ mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') , sense = GRB.MAXIMIZE)
 
 ##Constraints
 ##Primary market share grows in 2022(3%)
@@ -102,43 +106,44 @@ m.addConstr(msscm *x.sum('cm','*') + mssic *x.sum('ic','*') + mssms *x.sum('ms',
 m.addConstr(msscm *x.sum('cm','*') + mssic *x.sum('ic','*') + mssms *x.sum('ms','*') + msspn *x.sum('pn','*')
 + msswb *x.sum('wb','*') + mssb *x.sum('b','*') + mssa *x.sum('a','*') + mssot *x.sum('ot','*') + mssah *x.sum('ah','*')
 + mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*')  -0.02 <= 0.09)
-
+#
 # # ##Regional market share:
-# total_market_share = mstcm *x.sum('cm','*') + mstic *x.sum('ic','*') + mstms *x.sum('ms','*') + mstpn *x.sum('pn','*')
-# + mstwb *x.sum('wb','*') + mstb *x.sum('b','*') + msta *x.sum('a','*') + mstot *x.sum('ot','*') + mstah *x.sum('ah','*')
-# + mstd *x.sum('d','*') + mstp *x.sum('p','*') + mstls *x.sum('ls','*') + mstss *x.sum('ss','*') + mstps *x.sum('ps','*')
+# total_market_share = mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') + msppn *x.sum('pn','*')
+# + mspwb *x.sum('wb','*') + mspb *x.sum('b','*') + mspa *x.sum('a','*') + mspot *x.sum('ot','*') + mspah *x.sum('ah','*')
+# + mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*')
 #
 # # ##mid-west
-# m.addConstr(mstcm *x.sum('cm','*') + mstic *x.sum('ic','*') + mstms *x.sum('ms','*') >= total_market_share * 0.18)
-# m.addConstr(mstcm *x.sum('cm','*') + mstic *x.sum('ic','*') + mstms *x.sum('ms','*') <= total_market_share * 0.22)
+# m.addConstr(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') >= total_market_share * 0.18)
+# m.addConstr(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') <= total_market_share * 0.22)
 #
 # # # ##mid-atlantic
-# m.addConstr(mstpn *x.sum('pn','*')  >= total_market_share * 0.045)
-# m.addConstr(mstpn *x.sum('pn','*')  <= total_market_share * 0.055)
+# m.addConstr(msppn *x.sum('pn','*')  >= total_market_share * 0.045)
+# m.addConstr(msppn *x.sum('pn','*')  <= total_market_share * 0.055)
 #
 # # ##Northeast
-# m.addConstr( mstwb *x.sum('wb','*') + mstb *x.sum('b','*') >= total_market_share * 0.135)
-# m.addConstr( mstwb *x.sum('wb','*') + mstb *x.sum('b','*') <= total_market_share * 0.165)
+# m.addConstr( mspwb *x.sum('wb','*') + mspb *x.sum('b','*') >= total_market_share * 0.135)
+# m.addConstr( mspwb *x.sum('wb','*') + mspb *x.sum('b','*') <= total_market_share * 0.165)
 #
 # # # ##Southeast
-# m.addConstr(msta *x.sum('a','*') + mstot *x.sum('ot','*') >= total_market_share * 0.225)
-# m.addConstr(msta *x.sum('a','*') + mstot *x.sum('ot','*') <= total_market_share * 0.275)
+# m.addConstr(mspa *x.sum('a','*') + mspot *x.sum('ot','*') >= total_market_share * 0.225)
+# m.addConstr(mspa *x.sum('a','*') + mspot *x.sum('ot','*') <= total_market_share * 0.275)
 #
 # # # ##Southwest
-# m.addConstr(mstah *x.sum('ah','*') + mstd *x.sum('d','*') + mstp *x.sum('p','*') >= total_market_share * 0.18)
+# m.addConstr(mspah *x.sum('ah','*') + mspd *x.sum('d','*') + mspp *x.sum('p','*') >= total_market_share * 0.18)
 # # m.addConstr(mstah *x.sum('ah','*') + mstd *x.sum('d','*') + mstp *x.sum('p','*') <= total_market_share * 0.22)
 #
 # # ##West
-# m.addConstr(mstls *x.sum('ls','*') + mstss *x.sum('ss','*') + mstps *x.sum('ps','*') >= total_market_share * 0.135)
+# m.addConstr(mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') >= total_market_share * 0.135)
 # # m.addConstr(mstls *x.sum('ls','*') + mstss *x.sum('ss','*') + mstps *x.sum('ps','*') <= total_market_share * 0.165)
-#
+
 
 
 ##General Constraints
 m.addConstrs(x.sum('*',i) == 1 for i in range (2022,2024))
 m.addConstrs(x.sum('*',i) <= 2 for i in range (2024,2032))
-m.addConstrs(x.sum(i,'*') <= 1 for i in citylist)
-m.addConstrs(x.sum(lmarketlist,i) <= 1 for i in yearlist)
+m.addConstrs(x[citylist[i],2022]+ x[citylist[i],2023] + x[citylist[i],2024] + x[citylist[i],2025]
++ x[citylist[i],2026] + x[citylist[i],2027] + x[citylist[i],2028] + x[citylist[i],2029] + x[citylist[i],2030]
++ x[citylist[i],2031] <= 1 for i in range(0,14))
 
 
 m.optimize()
