@@ -63,9 +63,13 @@ mssps = 0.005
 
 
 ##Objective Value setting
-m.setObjective(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') + msppn *x.sum('pn','*')
-+ mspwb *x.sum('wb','*') + mspb *x.sum('b','*') + mspa *x.sum('a','*') + mspot *x.sum('ot','*') + mspah *x.sum('ah','*')
-+ mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') , sense = GRB.MAXIMIZE)
+m.setObjective(msscm *x.sum('cm','*') + mssic *x.sum('ic','*') + mssms *x.sum('ms','*') + msspn *x.sum('pn','*')
++ msswb *x.sum('wb','*') + mssb *x.sum('b','*') + mssa *x.sum('a','*') + mssot *x.sum('ot','*') + mssah *x.sum('ah','*')
++ mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*') , sense = GRB.MAXIMIZE)
+
+# m.setObjective(mspcm *x.sum('cm','*') + mspic *x.sum('ic','*') + mspms *x.sum('ms','*') + msppn *x.sum('pn','*')
+# + mspwb *x.sum('wb','*') + mspb *x.sum('b','*') + mspa *x.sum('a','*') + mspot *x.sum('ot','*') + mspah *x.sum('ah','*')
+# + mspd *x.sum('d','*') + mspp *x.sum('p','*') + mspls *x.sum('ls','*') + mspss *x.sum('ss','*') + mspps *x.sum('ps','*') , sense = GRB.MAXIMIZE)
 
 ##Constraints
 ##Primary market share grows in 2022(3%)

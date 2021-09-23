@@ -9,6 +9,7 @@ x = m.addVars(['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','p
 ## Set a dictionary to store value of each city's sumX in all year into different SumX
 citylist = ['cm', 'ic', 'ms','pn','wb','b','a','ot','ah','d','p','ls','ss','ps']
 yearlist = [2022,2023,2024,2025,2026,2027,2028,2029,2030,2031]
+lmarketlist = ['cm', 'pn','wb','a','ls']
 
 
 
@@ -63,9 +64,7 @@ mssps = 0.005
 
 
 ##Objective Value setting
-m.setObjective(msscm *x.sum('cm','*') + mssic *x.sum('ic','*') + mssms *x.sum('ms','*') + msspn *x.sum('pn','*')
-+ msswb *x.sum('wb','*') + mssb *x.sum('b','*') + mssa *x.sum('a','*') + mssot *x.sum('ot','*') + mssah *x.sum('ah','*')
-+ mssd *x.sum('d','*') + mssp *x.sum('p','*') + mssls *x.sum('ls','*') + mssss *x.sum('ss','*') + mssps *x.sum('ps','*') , sense = GRB.MAXIMIZE)
+m.setObjective(x.sum('*','*'), sense = GRB.MINIMIZE)
 
 ##Constraints
 ##Primary market share grows in 2022(3%)
@@ -144,7 +143,7 @@ m.addConstrs(x.sum('*',i) <= 2 for i in range (2024,2032))
 m.addConstrs(x[citylist[i],2022]+ x[citylist[i],2023] + x[citylist[i],2024] + x[citylist[i],2025]
 + x[citylist[i],2026] + x[citylist[i],2027] + x[citylist[i],2028] + x[citylist[i],2029] + x[citylist[i],2030]
 + x[citylist[i],2031] <= 1 for i in range(0,14))
-
+m.addConstrs(x.sum(lmarketlist,i) <= 1 for i in yearlist)
 
 m.optimize()
 
